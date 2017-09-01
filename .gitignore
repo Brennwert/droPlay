@@ -6,6 +6,9 @@ __pycache__/
 # sqlite
 db.sqlite3 
 
+# content
+musiControl/static/covers/*
+
 # C extensions
 *.so
 
