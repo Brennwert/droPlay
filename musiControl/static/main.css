@@ -1,0 +1,43 @@
+
+html,body {
+    height: 100%;
+    text-align: center;
+}
+
+body {
+    transform:rotate(180deg);
+
+    font-size: 32px;
+    font-family: 'PT Sans', sans-serif;
+    color: #fff;
+    /*background: url(/static/covers/Zoot_Woman.jpg);*/
+    background-color: #f60;
+    background-size: cover;
+    background-position: bottom;
+    height: 96%;
+}
+
+h1,h2,h3,h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #febf04;
+    text-shadow: 1px 1px 1px #000;
+}
+
+
+
+.containerBox {
+    width: 99%;
+    height: 450px;
+    padding: 3px;
+    /*margin-bottom: 15px;*/
+    /*display: inline-block;*/
+    border: 2px solid #fff;
+    border-radius: 25px;
+    background: rgba(54, 25, 25, .4);
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}

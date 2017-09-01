@@ -1,0 +1,125 @@
+
+#currentTrack, #trackList {
+  /*width: 49%;*/
+  height: 440px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+#trackList {
+  border-left: 2px solid #fff;
+  padding-left: 5px;
+  text-align: left;
+  overflow-y: scroll;
+}
+
+.trackListEntry {
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.trackListEntry:hover {
+  background: -moz-linear-gradient(top,  rgba(254,191,4,1) 0%, rgba(255,214,94,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(254,191,4,1) 0%,rgba(255,214,94,1) 100%);
+  background: linear-gradient(to bottom,  rgba(254,191,4,1) 0%,rgba(255,214,94,1) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#febf04', endColorstr='#ffd65e',GradientType=0 );
+}
+
+.musicFolderBack {
+  font-style: italic; 
+  font-weight: bold; 
+  color: #febf04;
+  text-shadow: 1px -1px 1px #fff;
+}
+
+.ctrl {
+  cursor: pointer;
+  width: 100px;
+  font-size: 90px;
+  color: #666;
+  text-shadow: 1px 1px 1px #000;
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 3px;
+  margin-left: 3px;
+  padding: 2px 7px 2px 7px;
+  border: 1px solid #000;
+  border-radius: 15px;
+}
+
+.ctrlActive {
+  opacity: 0.5;
+}
+
+.ctrlTiny {
+  margin: 0 15px 0 15px;
+  font-size: 32px;
+}
+
+.ctrlSmall {
+  width: 250px;
+}
+
+.ctrlHuge {
+  width: 250px;
+  font-size: 220px;
+  margin: 30px;
+}
+
+#currentTitle,#timeLeft {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+#currentTitle {
+  float: left;
+  max-width: 605px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
+
+#timeLeft {
+  float: right;
+  border-radius: 25px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: 5px;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 1px 1px 1px #fff;
+  background: -moz-linear-gradient(top,  rgba(254,191,4,1) 0%, rgba(255,214,94,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(254,191,4,1) 0%,rgba(255,214,94,1) 100%);
+  background: linear-gradient(to bottom,  rgba(254,191,4,1) 0%,rgba(255,214,94,1) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#febf04', endColorstr='#ffd65e',GradientType=0 );
+}
+
+.clear {
+  clear: both;
+}
+
+#ctrlVolume {
+  margin-top: 15px;
+  width: 72%;
+  display: inline-block;
+}
+
+#ctrlVolumeWrapper {
+  margin-top: 5px;
+}
+
+.ui-slider-range { 
+  background: #febf04; 
+}
+
+.ui-slider .ui-slider-handle {
+    height: 15px;
+    width: 15px;
+    margin-top: 2px;
+}
+
+.ui-slider {
+  height: 10px;
+}
