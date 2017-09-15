@@ -1,6 +1,5 @@
 import os
 import subprocess
-#from musiControl.models import Album
 
 class Music:
 
@@ -8,17 +7,28 @@ class Music:
 		os.system("mocp -P")
 		self.state = 'pause'
 
-	def play(self, obj = None):
-		self.state = 'play'
+	def play(self, obj = None):		
+		from musiControl.models import Album
 
 		if obj:
+			obj.state = 'loading'
+			obj.save()
 			self.path = obj.path
-			#Album.objects.filter(path=obj.path).playing = True
+
+			try:
+				pausedTitle = Album.objects.get(state="paused")
+				pausedTitle.state = ""
+				pausedTitle.save()
+			except Album.DoesNotExist:
+				pausedTitle = None
 			
 			fullpath = self.root + obj.path
 			print("Playing " + fullpath)
 
-			if obj.type == 'directory':
+			if obj.type == 'playlist':
+				os.system("mocp -c -a '" + fullpath + "' -p");
+
+			elif obj.type == 'directory':
 				os.system("mocp -P && mocp -c")
 			
 				for subdir, dirs, files in os.walk(fullpath):
@@ -28,16 +38,33 @@ class Music:
 						os.system("mocp -a '" + musicfile + "'")
 
 				os.system("mocp -p")
+
+			obj.state = "playing"
+			obj.save()
 		else:
 			# Just unpause:
 			os.system("mocp -U")
+
+			try:
+				pausedTitle = Album.objects.get(state="paused")
+				pausedTitle.state = "playing"
+				pausedTitle.save()
+			except Album.DoesNotExist:
+				pausedTitle = None
+
+		self.state = 'play'
 
 
 	def pause(self):
 		print ("Pausing")
 		self.state = 'pause'
-		#Album.objects.filter(playing=True).playing = False
+
 		os.system('mocp -P')
+
+		from musiControl.models import Album
+		playingTitle = Album.objects.get(state="playing")
+		playingTitle.state = "paused"
+		playingTitle.save()
 
 	def prev(self):
 		os.system('mocp -r')
@@ -48,6 +75,7 @@ class Music:
 	def currentTrack(self):
 		# Transforms mocp-info to JSON-hash.
 		from django.http import JsonResponse
+		from musiControl.models import Album
 
 		#playingAlbum = Album.objects.filter(playing=True)
 
@@ -58,6 +86,14 @@ class Music:
 		infoReturn = {}
 
 		#if playingAlbum: infoReturn['image'] = playingAlbum.image
+
+		#infoReturn['status'] = self.state
+
+		try:
+			loading = Album.objects.get(state="loading")
+			infoReturn['loading'] = 1
+		except Album.DoesNotExist:
+			infoReturn['loading'] = 0
 
 		for line in infoConsole:
 			key,value = line.split(': ')

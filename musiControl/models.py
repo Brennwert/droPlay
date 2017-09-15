@@ -5,5 +5,5 @@ class Album(models.Model):
     type = models.CharField(max_length=10)
     path = models.CharField(max_length=300)
     image = models.CharField(max_length=300)
-    playing = models.NullBooleanField()
+    state = models.CharField(max_length=10, default='')
     

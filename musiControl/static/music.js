@@ -78,10 +78,15 @@ var CurrentTrack = React.createClass({
 	    clickAct = 'PAUSE';
 	    clickURL = '/music/pause';
 
-	  } else if ( this.state.currentTrack.State == 'PAUSE' ) {
+	  } else if ( /PAUSE|STOP/.test(this.state.currentTrack.State) ) {
 	    playPauseClass += 'fa-play';
 	    clickAct = 'PLAY';
 	    clickURL = '/music/play';
+	  }
+
+	  var loading = '';
+	  if (this.state.currentTrack.loading == 1) {
+	  	loading = <div className="overlay"><div className="loading"></div></div>;
 	  }
 
 	  // extended controls to insert in below return:
@@ -95,7 +100,7 @@ var CurrentTrack = React.createClass({
 	  return (
 	    <div className="CurrentTrack">
 
-	      <div id="currentTitle">{this.state.currentTrack.Title}</div><div id="timeLeft">{this.state.currentTrack.TimeLeft}</div>
+	      <div id="currentTitle">{loading}{this.state.currentTrack.Title}</div><div id="timeLeft">{this.state.currentTrack.TimeLeft}</div>
 	    
 	      <div id="trackCtrl" className="clear">
 	        
