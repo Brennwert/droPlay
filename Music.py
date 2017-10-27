@@ -1,11 +1,20 @@
 import os
 import subprocess
 
+
 class Music:
 
 	def __init__(self):
-		os.system("mocp -P")
+		from musiControl.models import Album
+		os.system("mocp -P -o repeat")
 		self.state = 'pause'
+
+		try:
+			loading = Album.objects.get(state="loading")
+			loading.state = ""
+			loading.save()
+		except:
+			pass
 
 	def play(self, obj = None):		
 		from musiControl.models import Album
