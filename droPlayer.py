@@ -43,6 +43,7 @@ print ("Waiting for drop. Press Ctrl-C to stop.")
 print
 
 # Loop checking for RFID-chips:
+cnt = 0
 while continue_reading:
     
     # Scan for droplets
@@ -50,7 +51,6 @@ while continue_reading:
 
     # Found one?
     if status == MIFAREReader.MI_OK:
-        print
 
         (status,uid) = MIFAREReader.MFRC522_Anticoll()
 
@@ -62,7 +62,16 @@ while continue_reading:
             for droplet in droplets:
                 if str(droplet.dropletID) == dropID:
                     match = 1
-                    if not (music.state == 'play' and music.path == droplet.path):
+                    playPause = 1
+
+                    # Check state of MOC every 7 seconds:
+                    if cnt > 35: 
+                        playPause = music.playingOrPaused()
+                        print "MOC-Service healthy: " + str(playPause)
+                        cnt = 0
+
+                    # Press play?
+                    if not playPause or not (music.state == 'play' and music.path == droplet.path):
                     	music.play( droplet )
 
             if not match:
@@ -71,6 +80,8 @@ while continue_reading:
         else:
             print "Error reading droplet!"
 
+        print
+    cnt += 1
     time.sleep(0.2)
 
     #else:

@@ -16,6 +16,12 @@ class Music:
 		except:
 			pass
 
+
+	def playingOrPaused(self):
+            if os.system("mocp -i | grep 'State: P'") == 0:
+                return 1
+            return 0
+
 	def play(self, obj = None):		
 		from musiControl.models import Album
 
