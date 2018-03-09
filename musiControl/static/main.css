@@ -5,12 +5,14 @@ html,body {
 }
 
 body {
-    transform:rotate(180deg);
+    /*
+     Flip screen with this:
+     transform:rotate(180deg);
+    */
 
     font-size: 32px;
     font-family: 'PT Sans', sans-serif;
     color: #fff;
-    /*background: url(/static/covers/Zoot_Woman.jpg);*/
     background-color: #f60;
     background-size: cover;
     background-position: bottom;
